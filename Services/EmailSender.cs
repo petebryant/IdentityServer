@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer.Common;
+using Microsoft.Extensions.Options;
 
 namespace IdentityServer.Services
 {
@@ -9,6 +11,11 @@ namespace IdentityServer.Services
     // For more details see https://go.microsoft.com/fwlink/?LinkID=532713
     public class EmailSender : IEmailSender
     {
+        EmailConfiguration _config;
+        public EmailSender(IOptions<EmailConfiguration> options)
+        {
+            _config = options.Value;
+        }
         public Task SendEmailAsync(string email, string subject, string message)
         {
             return Task.CompletedTask;
