@@ -5,15 +5,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using IdentityServer.Models;
+using Microsoft.Extensions.Logging;
 
 namespace IdentityServer.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+    private readonly ILogger<HomeController> _logger;
+
+    public HomeController(ILogger<HomeController> logger)
+    {
+        _logger = logger;
+    }
+
+    public IActionResult Index()
+    {
+        _logger.LogInformation("Index page says hello");
+        return View();
+    }
 
         public IActionResult About()
         {
