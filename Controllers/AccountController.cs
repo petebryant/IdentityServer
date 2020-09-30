@@ -37,7 +37,7 @@ namespace IdentityServer.Controllers
         public string ErrorMessage { get; set; }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
