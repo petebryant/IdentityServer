@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IdentityServer.Data.Configurations;
+using IdentityServer.Models;
+using IdentityServer.Models.IdentityServer;
+using IdentityServer4.Models;
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using IdentityServer.Models;
 
 namespace IdentityServer.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IDataProtectionKeyContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -18,9 +18,15 @@ namespace IdentityServer.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new PersistedGrantConfiguration());
+            builder.ApplyConfiguration(new SecretConfigurations());
+            builder.ApplyConfiguration(new ClientEntityConfigurations());
         }
+
+        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
+        public DbSet<PersistedGrant> PersistedGrants { get; set; }
+        public DbSet<ClientEntity> Clients { get; set; }
     }
 }

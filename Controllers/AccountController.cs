@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using IdentityServer.Models;
+using IdentityServer.Models.AccountViewModels;
+using IdentityServer.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using IdentityServer.Models;
-using IdentityServer.Models.AccountViewModels;
-using IdentityServer.Services;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace IdentityServer.Controllers
 {
     [Authorize]
-    [Route("[controller]/[action]")]
+   // [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -41,6 +37,12 @@ namespace IdentityServer.Controllers
         public string ErrorMessage { get; set; }
 
         [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
@@ -49,7 +51,7 @@ namespace IdentityServer.Controllers
 
             ViewData["ReturnUrl"] = returnUrl;
             return View();
-        }
+        } 
 
         [HttpPost]
         [AllowAnonymous]

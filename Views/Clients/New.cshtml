@@ -1,0 +1,199 @@
+﻿@model IdentityServer.Models.ViewModels.ClientViewModel
+
+@{
+    ViewBag.Title = "Update Client";
+    Layout = "_Layout";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Adding new client</div>
+    <div class="panel-body">
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+        <form class="form-horizontal" asp-action="New">
+            <input type="hidden" class="form-control" asp-for="ClientId" placeholder="Email">
+
+            <div class="form-group">
+                <label asp-for="ClientName" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="ClientName" placeholder="Name of the Client">
+                    <span asp-validation-for="ClientName" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Secret" class="col-sm-4 control-label"></label>
+                        <div class="col-sm-8">
+                            <input class="form-control" asp-for="Secret">
+                            <span asp-validation-for="Secret" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ConfirmationSecret" class="col-sm-4 control-label"></label>
+                        <div class="col-sm-8">
+                            <input class="form-control" asp-for="ConfirmationSecret">
+                            <span asp-validation-for="Secret" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AllowedGrantTypes" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select asp-for="AllowedGrantTypes" asp-items="@Model.GrantTypeSelectList" class="form-control"></select>
+                    <span asp-validation-for="AllowedGrantTypes" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Uri" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="Uri">
+                    <span asp-validation-for="Uri" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RedirectUri" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="RedirectUri" placeholder="Redirect Uri">
+                    <span asp-validation-for="RedirectUri" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PostLogoutRedirectUri" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="PostLogoutRedirectUri" placeholder="Logout Redirect Uri">
+                    <span asp-validation-for="PostLogoutRedirectUri" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ClientAllowedCorsOrigin" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="ClientAllowedCorsOrigin">
+                    <span asp-validation-for="ClientAllowedCorsOrigin" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Resources" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select multiple="multiple" asp-for="Resources" asp-items="@Model.ResourceList" class="form-control"></select>
+                    <span asp-validation-for="Resources" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" asp-for="AllowOfflineAccess"> Allow Offline Access
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="RefreshTokenExpiration" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select asp-for="RefreshTokenExpiration" asp-items="@Model.TokenExpirationTypes" class="form-control"></select>
+                    <span asp-validation-for="TokenExpirationTypes" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RefreshTokenUsage" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select asp-for="RefreshTokenUsage" asp-items="@Model.TokenUsageTypes" class="form-control"></select>
+                    <span asp-validation-for="RefreshTokenUsage" class="text-danger"></span>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AccessTokenLifetime" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="AccessTokenLifetime">
+                    <span asp-validation-for="AccessTokenLifetime" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdentityTokenLifetime" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="IdentityTokenLifetime">
+                    <span asp-validation-for="IdentityTokenLifetime" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" asp-for="RequireConsent"> Require Consent
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" asp-for="AlwaysSendClientClaims"> Always Send Client Claims
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" asp-for="AllowAccessTokensViaBrowser"> Allow Access Tokens ViaBrowser
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <input type="hidden" asp-for="Enabled" value="true">
+
+            <button type="submit" class="btn btn-primary btn-lg ">Save</button>
+            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#bs-cancel-modal-lg">Cancel</button>
+
+        </form>
+
+    </div>
+
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="bs-cancel-modal-lg">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cancel Modification</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure....... ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a class="btn btn-default" asp-action="New" >Cancel All modification</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

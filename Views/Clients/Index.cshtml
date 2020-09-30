@@ -1,0 +1,96 @@
+﻿@model IEnumerable<IdentityServer.Models.IdentityServer.ClientEntity>
+
+@{
+    ViewBag.Title = "Clients";
+    Layout = "_Layout";
+}
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Registered Clients</div>
+    <div class="panel-body">
+        <table class="table table-striped  table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Access Token Lifetime</th>
+                    <th>Allowed Grant Types</th>
+                    <th>Allowed Scopes</th>
+                    <th>Redirect Uris</th>
+                    <th>I. Token Lifetime</th>
+                    <th>Protocol Type</th>
+                    <th>Enabled</th>
+                    <th style="width: 100px">
+                        <a class="btn btn-primary" href="New" role="button">                                
+                            <span class="glyphicon glyphicon-file" aria-hidden="true" />
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var client in Model)
+                {
+                    <tr>
+                        <td>@client.ClientName</td>
+                        <td>@client.AccessTokenLifetime</td>
+                        <td><badges for="@client.ClientAllowedGrantTypes"></badges></td>
+                        <td><badges for="@client.ClientAllowedScopes"></badges></td>
+                        <td><uris For="@client.ClientRedirectUris"></uris></td>
+                        <td>@client.IdentityTokenLifetime</td>
+                        <td>@client.ProtocolType</td>
+                        <td>
+                            <tickbox for="@client.Enabled"></tickbox>
+                        </td>
+                        <td>
+                            <a class="btn btn-sm" asp-action="Edit" asp-route-id="@client.ClientId" role="button">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
+                            </a>
+                            &nbsp;
+                            <a class="btn btn-sm" asp-action="Edit" asp-route-id="@client.ClientId"role="button">
+                                <span class="glyphicon glyphicon-remove delete" aria-hidden="true" />
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="bs-remove-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Deleting Client</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure....... ?</p>
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="" id="elmToDelete" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Delete" />
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@section Scripts {
+    <script>
+        $(function () {
+            $(".delete").click(function (e) {
+                console.log('clicked');
+                $('#bs-remove-modal').modal('show');
+                var id = $(this).closest('a').data('id');
+                    $('#elmToDelete').val(id);
+                });
+        });
+    </script>
+}

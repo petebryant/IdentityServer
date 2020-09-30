@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>IdentityServer</name>
+    </assembly>
+    <members>
+        <member name="M:IdentityServer.Controllers.UserAPIController.GetUsersAsync">
+            <summary>
+            Get all users
+            </summary>
+            <returns>List of users</returns>
+        </member>
+        <member name="M:IdentityServer.Controllers.UserAPIController.GetUserAsync(System.String)">
+            <summary>
+            Get User
+            </summary>
+            <param name="id">Id of the user</param>
+            <returns>User</returns>
+        </member>
+        <member name="T:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationEvents">
+            <summary>
+            Events for local API authentication
+            </summary>
+        </member>
+        <member name="P:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationEvents.OnClaimsTransformation">
+            <summary>
+            Invoked after the security token has passed validation and a ClaimsIdentity has been generated.
+            </summary>
+        </member>
+        <member name="M:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationEvents.ClaimsTransformation(IdentityServer.LocalApiAuthentication.ClaimsTransformationContext)">
+            <summary>
+            Invoked after the security token has passed validation and a ClaimsIdentity has been generated.
+            </summary>
+        </member>
+        <member name="T:IdentityServer.LocalApiAuthentication.ClaimsTransformationContext">
+            <summary>
+            Context class for local API claims transformation
+            </summary>
+        </member>
+        <member name="P:IdentityServer.LocalApiAuthentication.ClaimsTransformationContext.Principal">
+            <summary>
+            The principal
+            </summary>
+        </member>
+        <member name="P:IdentityServer.LocalApiAuthentication.ClaimsTransformationContext.HttpContext">
+            <summary>
+            the HTTP context
+            </summary>
+        </member>
+        <member name="T:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationExtensions">
+            <summary>
+            Extensions for registering the local access token authentication handler
+            </summary>
+        </member>
+        <member name="M:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationExtensions.AddLocalApiAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Func{System.Security.Claims.ClaimsPrincipal,System.Threading.Tasks.Task{System.Security.Claims.ClaimsPrincipal}})">
+            <summary>
+            Adds support for local APIs
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="transformationFunc">Function to transform the resulting principal</param>
+            <returns></returns>
+        </member>
+        <member name="M:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationExtensions.AddLocalApi(Microsoft.AspNetCore.Authentication.AuthenticationBuilder)">
+            <summary>
+            Registers the authentication handler for local APIs.
+            </summary>
+            <param name="builder">The builder.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationExtensions.AddLocalApi(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.Action{IdentityServer.LocalApiAuthentication.LocalApiAuthenticationOptions})">
+            <summary>
+            Registers the authentication handler for local APIs.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="configureOptions">The configure options.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationExtensions.AddLocalApi(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.String,System.Action{IdentityServer.LocalApiAuthentication.LocalApiAuthenticationOptions})">
+            <summary>
+            Registers the authentication handler for local APIs.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="authenticationScheme">The authentication scheme.</param>
+            <param name="configureOptions">The configure options.</param>
+            <returns></returns>
+        </member>
+        <member name="M:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationExtensions.AddLocalApi(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.String,System.String,System.Action{IdentityServer.LocalApiAuthentication.LocalApiAuthenticationOptions})">
+            <summary>
+            Registers the authentication handler for local APIs.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="authenticationScheme">The authentication scheme.</param>
+            <param name="displayName">The display name of this scheme.</param>
+            <param name="configureOptions">The configure options.</param>
+            <returns></returns>
+        </member>
+        <member name="T:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationHandler">
+            <summary>
+            Authentication handler for validating access token from the local IdentityServer
+            </summary>
+        </member>
+        <member name="M:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationHandler.#ctor(Microsoft.Extensions.Options.IOptionsMonitor{IdentityServer.LocalApiAuthentication.LocalApiAuthenticationOptions},Microsoft.Extensions.Logging.ILoggerFactory,System.Text.Encodings.Web.UrlEncoder,Microsoft.AspNetCore.Authentication.ISystemClock,IdentityServer4.Validation.ITokenValidator)">
+            <inheritdoc />
+        </member>
+        <member name="P:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationHandler.Events">
+            <summary>
+            The handler calls methods on the events which give the application control at certain points where processing is occurring. 
+            If it is not provided a default instance is supplied which does nothing when the methods are called.
+            </summary>
+        </member>
+        <member name="M:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationHandler.CreateEventsAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationHandler.HandleAuthenticateAsync">
+            <inheritdoc />
+        </member>
+        <member name="T:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationOptions">
+            <summary>
+            Options for local API authentication
+            </summary>
+            <seealso cref="T:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions" />
+        </member>
+        <member name="P:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationOptions.ExpectedScope">
+            <summary>
+            Allows setting a specific required scope (optional)
+            </summary>
+        </member>
+        <member name="P:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationOptions.SaveToken">
+            <summary>
+            Specifies whether the token should be saved in the authentication properties
+            </summary>
+        </member>
+        <member name="P:IdentityServer.LocalApiAuthentication.LocalApiAuthenticationOptions.Events">
+            <summary>
+            Allows implementing events
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey">
+            <summary>
+            Code first model used by <see cref="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.EntityFrameworkCoreXmlRepository`1"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey.Id">
+            <summary>
+            The entity identifier of the <see cref="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey.FriendlyName">
+            <summary>
+            The friendly name of the <see cref="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey.Xml">
+            <summary>
+            The XML representation of the <see cref="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.EntityFrameworkCoreXmlRepository`1">
+            <summary>
+            An <see cref="T:Microsoft.AspNetCore.DataProtection.Repositories.IXmlRepository"/> backed by an EntityFrameworkCore datastore.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.EntityFrameworkCoreXmlRepository`1.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Creates a new instance of the <see cref="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.EntityFrameworkCoreXmlRepository`1"/>.
+            </summary>
+            <param name="services"></param>
+            <param name="loggerFactory">The <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/>.</param>
+        </member>
+        <member name="M:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.EntityFrameworkCoreXmlRepository`1.GetAllElements">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.EntityFrameworkCoreXmlRepository`1.StoreElement(System.Xml.Linq.XElement,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.IDataProtectionKeyContext">
+            <summary>
+            Interface used to store instances of <see cref="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey"/> in a <see cref="T:Microsoft.EntityFrameworkCore.DbContext"/>
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.IDataProtectionKeyContext.DataProtectionKeys">
+            <summary>
+            A collection of <see cref="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey"/>
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCoreDataProtectionExtensions">
+            <summary>
+            Extension method class for configuring instances of <see cref="T:Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.EntityFrameworkCoreXmlRepository`1"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.DataProtection.EntityFrameworkCoreDataProtectionExtensions.PersistKeysToDbContext``1(Microsoft.AspNetCore.DataProtection.IDataProtectionBuilder)">
+            <summary>
+            Configures the data protection system to persist keys to an EntityFrameworkCore datastore
+            </summary>
+            <param name="builder">The <see cref="T:Microsoft.AspNetCore.DataProtection.IDataProtectionBuilder"/> instance to modify.</param>
+            <returns>The value <paramref name="builder"/>.</returns>
+        </member>
+    </members>
+</doc>

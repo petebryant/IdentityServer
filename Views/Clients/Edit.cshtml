@@ -1,0 +1,239 @@
+﻿@model IdentityServer.Models.ViewModels.ClientViewModel
+
+@{
+    ViewBag.Title = "Update Client";
+    Layout = "_Layout";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Updating @Model.ClientName</div>
+    <div class="panel-body">
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+        <form class="form-horizontal" asp-action="Edit">
+            @Html.AntiForgeryToken()
+            <input type="hidden" class="form-control" asp-for="ClientId" placeholder="Email">
+
+            <div class="form-group">
+                <label asp-for="ClientName" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="ClientName">
+                    <span asp-validation-for="ClientName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Secret" class="col-sm-4 control-label"></label>
+                        <div class="col-sm-8">
+                            <input class="form-control" asp-for="Secret" value="@Model.Secret">
+                            <span asp-validation-for="Secret" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ConfirmationSecret" class="col-sm-4 control-label"></label>
+                        <div class="col-sm-8">
+                            <input class="form-control" asp-for="ConfirmationSecret" value="@Model.Secret">
+                            <span asp-validation-for="Secret" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="AllowedGrantTypes" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select asp-for="AllowedGrantTypes" asp-items="@Model.GrantTypeSelectList" class="form-control"></select>
+                    <span asp-validation-for="AllowedGrantTypes" class="text-danger"></span>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Uri" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="Uri">
+                    <span asp-validation-for="Uri" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RedirectUri" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="RedirectUri">
+                    <span asp-validation-for="RedirectUri" class="text-danger"></span>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PostLogoutRedirectUri" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="PostLogoutRedirectUri">
+                    <span asp-validation-for="PostLogoutRedirectUri" class="text-danger"></span>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ClientAllowedCorsOrigin" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="ClientAllowedCorsOrigin">
+                    <span asp-validation-for="ClientAllowedCorsOrigin" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Resources" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select multiple="multiple" asp-for="Resources" asp-items="@Model.ResourceList" class="form-control" style="height: 100pt"></select>
+                    <span asp-validation-for="Resources" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" asp-for="AllowOfflineAccess"> Allow Offline Access
+
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="RefreshTokenExpiration" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select asp-for="RefreshTokenExpiration" asp-items="@Model.TokenExpirationTypes" class="form-control"></select>
+                    <span asp-validation-for="RefreshTokenExpiration" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RefreshTokenUsage" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <select asp-for="RefreshTokenUsage" asp-items="@Model.TokenUsageTypes" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AccessTokenLifetime" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="AccessTokenLifetime">
+                    <span asp-validation-for="AccessTokenLifetime" class="text-danger"></span>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdentityTokenLifetime" class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="IdentityTokenLifetime">
+                    <span asp-validation-for="IdentityTokenLifetime" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" asp-for="RequireConsent"> Require Consent
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" asp-for="AlwaysSendClientClaims"> Always Send Client Claims
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" asp-for="AllowAccessTokensViaBrowser"> Allow Access Tokens ViaBrowser
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            
+            <input type="hidden" asp-for="Enabled">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#bs-cancel-modal-lg">Cancel</button>
+            @if (Model.Enabled)
+            {
+                <a asp-action="Deactivate" class="btn btn-danger" asp-route-id="@Model.ClientId">Deactivate</a>
+            }
+            else
+            {
+                <a asp-action="Activate" class="btn btn-success" asp-route-id="@Model.ClientId">Activate</a>
+            }
+
+            @*<div class="modal fade bs-secret-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Client Secret</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input id="secretinput" type="text" class="form-control" asp-for="NewSecret">
+                    </div>
+                    <div class="modal-footer">
+                        <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->*@
+        </form>
+    </div>
+
+
+</div>
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="bs-cancel-modal-lg">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cancel Modification</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure....... ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a class="btn btn-default" asp-action="Edit" asp-route-id="@Model.ClientId">Cancel All modification</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // clear input values
+            $('#cancel').on('click', function () {
+                $('form').find('#secretinput').val('');
+            });
+
+        });
+    </script>
+}
