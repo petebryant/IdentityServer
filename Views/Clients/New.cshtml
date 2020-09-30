@@ -12,7 +12,8 @@
             <a asp-action="Index">Back to List</a>
         </div>
         <form class="form-horizontal" asp-action="New">
-            <input type="hidden" class="form-control" asp-for="ClientId" placeholder="Email">
+            @Html.AntiForgeryToken()
+            <input type="hidden" class="form-control" asp-for="ClientId" >
 
             <div class="form-group">
                 <label asp-for="ClientName" class="col-sm-2 control-label"></label>

@@ -35,9 +35,9 @@ namespace IdentityServer.Stores
             return await _context.Clients.ToListAsync();
         }
 
-        public Task<ClientEntity> GetAsync(string id)
+        public async Task<ClientEntity> GetAsync(string id)
         {
-            throw new NotImplementedException();
+            return await _context.Clients.FirstOrDefaultAsync(c => c.ClientId == id);
         }
 
         public Task RemoveAsync(string id)

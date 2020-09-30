@@ -1,6 +1,8 @@
 ﻿using IdentityServer.Stores;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using IdentityServer.Models.ViewModels;
+using IdentityModel;
 
 namespace IdentityServer.Controllers
 {
@@ -16,6 +18,57 @@ namespace IdentityServer.Controllers
         {
             var clients = await _clientRepository.GetAllAsync();
             return View(clients);
+        }
+
+        public IActionResult New()
+        {
+            //TODO need to get Resources
+            var viewModel = new ClientViewModel();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> New(ClientViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    model.Secret = model.Secret.ToSha256();
+                    await _clientRepository.AddAsync(model.MapToModel());
+                    //TODO need to add extension .WithSuccess
+                    return RedirectToAction(nameof(Index));
+                }
+
+                //TODO need to add .WithError
+                return View(model);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index)); 
+            }
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(id))
+                    return RedirectToAction(nameof(Index));
+
+                var client = await _clientRepository.GetAsync(id);
+
+                if (client == null)
+                    return RedirectToAction(nameof(Index));
+
+                var viewModel = new ClientViewModel(client);
+                return View(viewModel);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }
