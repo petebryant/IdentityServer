@@ -14,6 +14,7 @@ namespace IdentityServer.Stores
         Task UpdateAsync(string id, ClientEntity entity);
         Task<IEnumerable<ClientEntity>> GetAllAsync();
         Task<ClientEntity> GetAsync(string id);
+        Task<ClientEntity> GetAsync(Func<ClientEntity, bool> predicate);
         Task RemoveAsync(string id);
     }
 }

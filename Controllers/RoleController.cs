@@ -35,5 +35,27 @@ namespace IdentityServer.Controllers
             var roles = _roleManager.Roles;
             return View(roles);
         }
+
+        public IActionResult New()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> UniqueRoleName(string Name, string Id)
+        {
+            try{
+                if (string.IsNullOrEmpty(Id))
+                {
+                    var result = await _roleManager.FindByNameAsync(Name);
+                    return Json(result == null);
+                }
+
+                return Json(true);
+            }
+            catch {
+                //TODO need to add .WithError extension
+                return RedirectToAction(nameof(Index));
+            }
+        }
     }
 }

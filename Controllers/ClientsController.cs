@@ -70,5 +70,22 @@ namespace IdentityServer.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
+
+        public async Task<IActionResult> UniqueClientName(string ClientName, string ClientId)
+        {
+            try{
+                if (string.IsNullOrEmpty(ClientId))
+                {
+                    var result = await _clientRepository.GetAsync(c => c.ClientName.ToLower() == ClientName.ToLower());
+                    return Json(result == null);
+                }
+
+                return Json(true);
+            }
+            catch {
+                //TODO need to add .WithError extension
+                return RedirectToAction(nameof(Index));
+            }
+        }
     }
 }
