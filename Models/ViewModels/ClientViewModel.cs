@@ -14,6 +14,7 @@ namespace IdentityServer.Models.ViewModels
 {
     public class ClientViewModel : IValidatableObject
     {
+
         private IEnumerable<string> _resources;
         private static readonly IEnumerable<string> _gTypes = new[] {
             "Code",

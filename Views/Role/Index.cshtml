@@ -1,7 +1,7 @@
-﻿@model IEnumerable<IdentityServer.Models.IdentityServer.ClientEntity>
+﻿@model IEnumerable<IdentityServer.Models.ApplicationRole>
 
 @{
-    ViewBag.Title = "Clients";
+    ViewBag.Title = "Roles";
     Layout = "_Layout";
 }
 
@@ -13,40 +13,27 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Access Token Lifetime</th>
-                    <th>Allowed Grant Types</th>
-                    <th>Allowed Scopes</th>
-                    <th>Redirect Uris</th>
-                    <th>I. Token Lifetime</th>
-                    <th>Protocol Type</th>
-                    <th>Enabled</th>
+                    <th>Description</th>
+
                     <th style="width: 100px">
-                        <a class="btn btn-primary" href="Clients/New" role="button">                                
+                        <a class="btn btn-primary" href="Role/New" role="button">                                
                             <span class="glyphicon glyphicon-file" aria-hidden="true" />
                         </a>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var client in Model)
+                @foreach (var role in Model)
                 {
                     <tr>
-                        <td>@client.ClientName</td>
-                        <td>@client.AccessTokenLifetime</td>
-                        <td><badges for="@client.ClientAllowedGrantTypes"></badges></td>
-                        <td><badges for="@client.ClientAllowedScopes"></badges></td>
-                        <td><uris For="@client.ClientRedirectUris"></uris></td>
-                        <td>@client.IdentityTokenLifetime</td>
-                        <td>@client.ProtocolType</td>
+                        <td>@role.Name</td>
+                        <td>@role.Description</td>
                         <td>
-                            <tickbox for="@client.Enabled"></tickbox>
-                        </td>
-                        <td>
-                            <a class="btn btn-sm" asp-action="Edit" asp-route-id="@client.ClientId" role="button">
+                            <a class="btn btn-sm" asp-action="Edit" asp-route-id="@role.Id" role="button">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"/>
                             </a>
                             &nbsp;
-                            <a class="btn btn-sm" asp-action="Delete" asp-route-id="@client.ClientId"role="button">
+                            <a class="btn btn-sm" asp-action="Delete" asp-route-id="@role.Id" role="button">
                                 <span class="glyphicon glyphicon-remove delete" aria-hidden="true" />
                             </a>
                         </td>
@@ -65,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Deleting Client</h4>
+                <h4 class="modal-title">Deleting Role</h4>
             </div>
             <div class="modal-body">
                 <p>Are you sure....... ?</p>
