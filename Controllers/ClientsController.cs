@@ -1,4 +1,5 @@
 ﻿using IdentityServer.Stores;
+using IdentityServer.Common;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using IdentityServer.Models.ViewModels;
@@ -8,6 +9,9 @@ namespace IdentityServer.Controllers
 {
     public class ClientsController: Controller
     {
+        private const string GENERIC_ERROR = "There was an error creating the Client record.";
+        private const string GENERIC_SUCCESS = "The Client record was saved.";
+
         readonly IClientRepository _clientRepository;
         public ClientsController(IClientRepository clientRepository)
         {
@@ -37,16 +41,15 @@ namespace IdentityServer.Controllers
                 {
                     model.Secret = model.Secret.ToSha256();
                     await _clientRepository.AddAsync(model.MapToModel());
-                    //TODO need to add extension .WithSuccess
-                    return RedirectToAction(nameof(Index));
+
+                    return RedirectToAction(nameof(Index)).WithSuccess(GENERIC_SUCCESS);
                 }
 
-                //TODO need to add .WithError
-                return View(model);
+                return View(model).WithError(GENERIC_ERROR);
             }
             catch
             {
-                return RedirectToAction(nameof(Index)); 
+                return RedirectToAction(nameof(Index)).WithError(GENERIC_ERROR);
             }
         }
 
@@ -55,19 +58,19 @@ namespace IdentityServer.Controllers
             try
             {
                 if (string.IsNullOrEmpty(id))
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index)).WithError(GENERIC_ERROR);
 
                 var client = await _clientRepository.GetAsync(id);
 
                 if (client == null)
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index)).WithError(GENERIC_ERROR);
 
                 var viewModel = new ClientViewModel(client);
-                return View(viewModel);
+                return View(viewModel).WithSuccess(GENERIC_SUCCESS);
             }
             catch
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index)).WithError(GENERIC_ERROR);
             }
         }
 
@@ -84,7 +87,7 @@ namespace IdentityServer.Controllers
             }
             catch {
                 //TODO need to add .WithError extension
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index)).WithError(GENERIC_ERROR);
             }
         }
     }

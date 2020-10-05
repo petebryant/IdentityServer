@@ -68,6 +68,9 @@ namespace IdentityServer
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddSession();
+
             services.AddLocalApiAuthentication();
             SwaggerHelper.Configuration = Configuration;
             services.AddSwaggerGen(SwaggerHelper.ConfigureSwaggerGen);
@@ -87,11 +90,11 @@ namespace IdentityServer
                 app.UseHsts();
             }
 
+            app.UseStaticFiles();
             app.UseAuthentication();
-
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
-            app.UseStaticFiles();
+            app.UseSession();
 
             app.UseSwagger();
             app.UseSwaggerUI(SwaggerHelper.ConfigureSwaggerUI);

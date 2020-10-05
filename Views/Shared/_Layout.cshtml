@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using IdentityServer.Common
 
 @inject SignInManager<ApplicationUser> SignInManager
 
@@ -64,6 +65,20 @@
         </div>
     </nav>
     <div class="container body-content">
+        @{
+            var alerts = this.Context.GetAlerts();
+
+            if (alerts != null)
+            {
+                foreach (var al in alerts)
+                {
+                    //TODO this needs the taghelper
+                    <div class="alert alert-info alert-dismissable">message</div>
+                }
+            }
+        }
+        <br/>
+
         @RenderBody()
         <hr />
         <footer>
