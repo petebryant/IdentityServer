@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IdentityServer.Models.ViewModels;
 
 namespace IdentityServer.Controllers
 {
@@ -38,7 +39,31 @@ namespace IdentityServer.Controllers
 
         public IActionResult New()
         {
-            return View();
+            var model = new RoleViewModel();
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> New(RoleViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    await _roleManager.CreateAsync(model.MapToModel());
+                    //TODO need to add extension .WithSuccess
+                    return RedirectToAction(nameof(Index));
+                }
+
+                //TODO need to add .WithError
+                return View(model);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index)); 
+            }
         }
 
         public async Task<IActionResult> UniqueRoleName(string Name, string Id)

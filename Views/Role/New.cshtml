@@ -1,4 +1,4 @@
-﻿@model IdentityServer.Models.ApplicationRole
+﻿@model IdentityServer.Models.ViewModels.RoleViewModel
 
 @{
     ViewBag.Title = "Create a Role";
@@ -13,6 +13,7 @@
         </div>
         <form class="form-horizontal" asp-action="New">
             @Html.AntiForgeryToken()
+            <input type="hidden" class="form-control" asp-for="Id" />
 
             <div class="form-group">
                 <label asp-for="Name" class="col-sm-2 control-label"></label>

@@ -37,7 +37,12 @@ namespace IdentityServer.Models.ViewModels
         public ApplicationRole MapToModel()
         {
             var role = new ApplicationRole();
-            role.Id = this.Id;
+
+            if (string.IsNullOrEmpty(this.Id))
+                role.Id = Guid.NewGuid().ToString();
+            else
+                role.Id = this.Id;
+                
             role.Name = this.Name;
             role.Description = this.Description;
             return role;
@@ -45,7 +50,9 @@ namespace IdentityServer.Models.ViewModels
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            return null;
+            var results = new List<ValidationResult>();
+
+            return results;
         }
       }
 }
