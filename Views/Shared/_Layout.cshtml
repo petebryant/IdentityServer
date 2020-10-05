@@ -72,8 +72,7 @@
             {
                 foreach (var al in alerts)
                 {
-                    //TODO this needs the taghelper
-                    <div class="alert alert-info alert-dismissable">message</div>
+                    <alert type="@al.AlertType" message="@al.Message"/>
                 }
             }
         }
