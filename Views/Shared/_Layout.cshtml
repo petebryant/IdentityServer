@@ -72,11 +72,13 @@
             {
                 foreach (var al in alerts)
                 {
-                    <alert type="@al.AlertType" message="@al.Message"/>
+                    <alert type="@al.AlertType" message="@al.Message"></alert>
                 }
             }
         }
         <br/>
+
+        @* <div class="loading">Loading&#8230;</div> *@
 
         @RenderBody()
         <hr />
